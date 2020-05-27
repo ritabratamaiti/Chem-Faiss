@@ -89,13 +89,13 @@ class pipeline:
       print('This directory already exists, please choose a different name!')
     save_index(self.index, path+'/search.index')
     data = {'fingerprinter': self.fingerprinter.__name__}
-    with open('config.json', 'w', encoding='utf-8') as f:
+    with open(path+'/config.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
   def load_pipeline(self, path):
     '''
     Loads the pipeline from the path directory. 
     '''
     self.index = load_index(path+'/search.index')
-    with open('config.json') as f:
+    with open(path+'/config.json') as f:
         data = json.load(f)
     self.fingerprinter = eval(data['fingerprinter'])
