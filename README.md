@@ -8,6 +8,10 @@ This projects utilises the vector similarity search functionality from [Faiss](h
 **Typical use cases include drug design, finding structural matches from a large dataset and drug-repurposement.**
 Chem Faiss is an experimental tool developed at [AIDDT.de](http://aiddt.de "AIDDT.de"), and released under the MIT License.
 
+# Quickstart
+
+[Start using Faiss Chem in a Google Colab notebook! Just click the Open in Colab button at the top of the notebook.](https://github.com/ritabratamaiti/Chem-Faiss/blob/master/Chem_Faiss_Colab.ipynb)
+
 # Requirements
 
 *Note: Pick an installation which best suits your needs and runs on your system.*
