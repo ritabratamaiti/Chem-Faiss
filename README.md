@@ -53,24 +53,30 @@ You can look through [Chem_Faiss_example.py](https://github.com/ritabratamaiti/C
 
 ## Use Chem Faiss as a web service with Flask!
 
+	from flask import Flask, jsonify, request
+	from Chem_Faiss import pipeline
+	import Chem_Faiss
 
-    from flask import Flask, jsonify, request
-    from Chem_Faiss import pipeline
-    import Chem_Faiss
-    
-    app = Flask(__name__)
-    searcher = pipeline()
-    searcher.load_pipeline('sample')
-    mols = Chem_Faiss.load_sdf('molecules.sdf')
-    
-    @app.route('/query', methods = ['POST'])
-    def query():
-        q = request.form('SMILES')
-        I = searcher.make_query_smiles(q = s, k = 2)
-        smiles = Chem_Faiss.idx_to_smiles(mols, I)
-        return jsonify({
-        'result' : smiles
-        })
+
+	app = Flask(__name__)
+	searcher = pipeline()
+	searcher.load_pipeline('sample')
+	mols = Chem_Faiss.load_sdf('molecules.sdf')
+
+
+	@app.route('/query', methods = ['GET','POST'])
+	def query():
+	    d = request.get_json()
+	    s = d['SMILES']
+	    print(s)
+	    print(request.form)
+	    I = searcher.make_query_smiles(q = s, k = 2)
+	    smiles = Chem_Faiss.idx_to_smiles(mols, I)
+	    return jsonify({
+	    'result' : smiles
+	    })
+
+	app.run()
 
 To make a query, send a JSON POST request to `server/query` like so:
 
