@@ -1,9 +1,9 @@
-
 from flask import Flask, jsonify, request
 from Chem_Faiss import pipeline
 import Chem_Faiss
 
 app = Flask(__name__)
+searcher = pipeline()
 searcher.load_pipeline('sample')
 mols = Chem_Faiss.load_sdf('molecules.sdf')
 
