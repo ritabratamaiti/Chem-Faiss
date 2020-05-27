@@ -15,3 +15,5 @@ def query():
     return jsonify({
     'result' : smiles
     })
+
+app.run()
