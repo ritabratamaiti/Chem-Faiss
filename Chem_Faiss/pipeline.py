@@ -12,7 +12,16 @@ from .utils import *
 RDLogger.DisableLog('rdApp.*')
 
 class pipeline:
+  '''
+  Creates a pipeline to make an index, search queries, and save indexes to the disk. 
+  '''
   def __init__(self, sdf_path = None, smiles_list = None, mols_list = None, fingerprinter = None):
+    '''
+    Initialises a pipeline and creates an index. Can be configured to use a custom fingerprinter. Accepts SDF files,
+    lists of SMILES strings or a list of RDKit Mols to generate the index.
+    * NOTE: Typically works with a fingerprinter defined in rdkit.Chem.AllChem
+    * NOTE: To be refactored in the future for conciseness.
+    '''
     self.index = None
     if fingerprinter is None:
       self.fingerprinter = AllChem.GetMACCSKeysFingerprint
@@ -45,20 +54,35 @@ class pipeline:
         fps = make_fps(mols, fingerprinter)
         self.index = make_index(fps)
   def make_query_smiles(self, q, k = 4):
+    '''
+    Query the index for a single SMILES string. This will return top k results from the index.
+    '''
     mol = Chem.MolFromSmiles(q)
     D, I = search(self.index, mol, k, self.fingerprinter)
     return I
   def make_query_mol(self, mol, k = 4):
+    '''
+    Query the index for a single RDKit Mol. This will return top k results from the index.
+    '''
     D, I = search(self.index, mol, k, self.fingerprinter)
     return I
   def bulk_query_smiles(self, smiles_list, k = 4):
+    '''
+    Query the index for a list of SMILES string. This will return top k results from the index for each of the list entries.
+    '''
     mols = load_smiles(smiles_list)
     D, I = bulk_search(self.index, mols, k, self.fingerprinter)
     return I
   def bulk_query_mols(self, mols, k = 4):
+    '''
+    Query the index for a list of RDKit Mols. This will return top k results from the index for each of the list entries.
+    '''
     D, I = bulk_search(self.index, mols, k, self.fingerprinter)
     return I
   def save_pipeline(self, path):
+    '''
+    Saves the pipeline in the path directory. The index and a JSON config file will be saved.
+    '''
     if not os.path.exists(path):
       os.makedirs(path)
     else:
@@ -68,6 +92,9 @@ class pipeline:
     with open('config.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
   def load_pipeline(self, path):
+    '''
+    Loads the pipeline from the path directory. 
+    '''
     self.index = load_index(path+'/search.index')
     with open('config.json') as f:
         data = json.load(f)
