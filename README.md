@@ -59,10 +59,11 @@ You can look through [Chem_Faiss_example.py](https://github.com/ritabratamaiti/C
     import Chem_Faiss
     
     app = Flask(__name__)
+    searcher = pipeline()
     searcher.load_pipeline('sample')
     mols = Chem_Faiss.load_sdf('molecules.sdf')
     
-    @app.route('/query', method = 'POST')
+    @app.route('/query', methods = ['POST'])
     def query():
         q = request.form('SMILES')
         I = searcher.make_query_smiles(q = s, k = 2)
