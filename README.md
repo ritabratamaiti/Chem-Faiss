@@ -89,7 +89,15 @@ To make a query, send a JSON POST request to `server/query` like so:
     	'SMILES' : 'CCC(CC)COC(=O)[C@H](C)N[P@](=O)(OC[C@H]1O[C@@](C#N)(c2ccc3c(N)ncnn23)[C@H](O)[C@@H]1O)Oc1ccccc1'
     }
 
+## Reference
+
+If you use Chem Faiss in your research, this is the reference to cite:
+
+[![DOI](https://zenodo.org/badge/267277104.svg)](https://zenodo.org/badge/latestdoi/267277104)
+
+
 ## Acknowledgements
 - [Faiss](https://github.com/facebookresearch/faiss "Faiss")
 - [RDKit](https://www.rdkit.org/ "RDKit")
 - [AIDDT](aiddt.de)
+
