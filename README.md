@@ -6,7 +6,7 @@
 
 This project utilises the vector similarity search functionality from [Faiss](http://https://github.com/facebookresearch/faiss "Faiss"), in conjunction with chemical fingerprinting to build a scalable similarity search architecture for compounds/molecules. This repository also contains an index created from the [ChEMBL SARS-CoV-2 compound data](http://https://www.ebi.ac.uk/chembl/g/#browse/compounds/filter/_metadata.compound_records.src_id%3A52 "ChEMBL SARS-CoV-2 compund data"), available under the `sample/` directory of this repository, which you can load and use via the pipeline object. The [Chem_Faiss_flask.py](https://github.com/ritabratamaiti/Chem_Faiss/blob/master/Chem_Faiss_flask.py) demo uses the index from `sample/`. The data used to create the index is stored as `molecules.sdf`
 **Typical use cases include drug design, finding structural matches from a large dataset and drug-repurposement.**
-Chem Faiss is an experimental tool developed at [AIDDT.de](http://aiddt.de "AIDDT.de"), and released under the MIT License.
+Chem Faiss is an experimental tool released under the MIT License.
 
 # Quickstart
 
